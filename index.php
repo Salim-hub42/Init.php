@@ -13,19 +13,31 @@
     </header>
     <main>
         <?php
-     $note = 13;
-     $dificulte = "facile";
-     $dificulte = "dificile";
-
-     if($note <= 12 && $dificulte == "facile"){
-        echo"c'est null !";
-     }elseif($note >=12  && $dificulte == "facile"){
-        echo "Pas mal , mais c'etait facile";
-     }elseif($note <=12 && $dificulte == "dificile" ){
-        echo "C'est pas terrible et c'etait difficile";
-     }else{
-        echo " Bravo , c'etait difficile mais tu as reussi";
-     }
+          $note = 22;
+  
+switch($note){
+    case 12:
+          echo "Tu es nul";
+    break;
+        case 14:
+          echo "Tu es très faible";
+    break;
+        case 16:
+          echo "Tu es faible";
+    break;
+        case 18:
+          echo "Tu es moyen";
+    break;
+        case 20:
+          echo "Tu es fort";
+    break;
+        case 22:
+          echo "Excellent travail";
+    break;
+        default:
+          echo "Désolé, je n'ai pas de message à afficher pour cette note";
+    break;
+}
 
        
         ?>
