@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Les variable en PHP</title>
+    <title>Les boucles en PHP</title>
 </head>
 
 <body>
@@ -12,29 +12,27 @@
 
     </header>
     <main>
-        <?php
-$etudiant = false;
-if($etudiant == true){
-    echo"Vous êtes étudiant";
+    <?php
+ /*$x = 1;
+ while ($x <= 10){
+    echo"Ceci est le nobre : $x <br>";
+    $x++;
+ }
+$x = 1;
+do{
+    echo"Ceci est le nombre : $x  <br>";
+    $x++;
 }
-else{
-    echo"Vous n'êtes pas étudiant";
+while($x <= 10);*/
+
+
+for($x=10;$x>=1;$x--){
+    echo"Ceci est le nombre : $x <br>";
+foreach(array(1,2,3,4,5) as $valeur){
+    echo"La valeur est : $valeur <br>";
+}
 }
 
-        //* deuxième exemple
- if($etudiant){
-    echo"Vous êtes étudiant";
- }
- else{
-    echo "Vous n'êtes pas étudiant";
- }
-        //* troisième exemple 
-    if(! $etudiant){
-        echo"Vous n'êtes pas étudiant";
-    }
-    else{
-        echo "Vous êtes étudiant";
-    }   
     ?>
     </main>
     <footer>
