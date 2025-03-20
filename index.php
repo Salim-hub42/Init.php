@@ -12,28 +12,22 @@
 
     </header>
     <main>
-    <?php
- /*$x = 1;
- while ($x <= 10){
-    echo"Ceci est le nobre : $x <br>";
-    $x++;
- }
-$x = 1;
-do{
-    echo"Ceci est le nombre : $x  <br>";
-    $x++;
-}
-while($x <= 10);*/
-
-
-for($x=10;$x>=1;$x--){
-    echo"Ceci est le nombre : $x <br>";
-foreach(array(1,2,3,4,5) as $valeur){
-    echo"La valeur est : $valeur <br>";
-}
-}
-
-    ?>
+        <?php
+        $menbres = array(
+            array('Sal', 35, 'vico42000@yahoo.fr'),
+            array('Ass', 36, 'ass@yahoo.com'),
+            array('Zak', 6, 'Zak@yahoo.com'),
+        );
+        for ($ligne = 0; $ligne < 3; $ligne++) {
+            $menbres_no = $ligne + 1;
+            echo 'Menbre numéro'  . $menbres_no .  '<br>';
+            echo '<ul>';
+            for ($col = 0; $col < 3; $col++) {
+                echo '<li>' . $menbres[$ligne][$col] . '</li>';
+            }
+            echo '</ul>';
+        }
+        ?>
     </main>
     <footer>
 
