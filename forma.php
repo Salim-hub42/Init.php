@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PHP et MySql</title>
+    <title>Récupération de données mysql</title>
 </head>
 
 <body>
@@ -16,32 +16,41 @@
 $serveur = "localhost";
 $login = "root";
 $mdp = "";
-
-try {
-    $connexion = new PDO("mysql:host=$serveur;port=3307;dbname=test2", $login, $mdp);
+try{
+    $connexion = new PDO("mysql:host=$serveur;port=3307;dbname=test2;charset=utf8",$login,$mdp);
     $connexion->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    echo "Connexion réussie à la base de données !<br>";
 
-    // Préparation de la requête avec des paramètres
-    $insertion = "INSERT INTO Visiteurs(nom, prenom, email) VALUES (:nom, :prenom, :email)";
-    $stmt = $connexion->prepare($insertion);
+    $jointure_int = "
+    SELECT ins.prenom, com.commentaire
+    FROM inscrits AS ins
+    LEFT  JOIN commentaire AS com
+    ON ins.id = com.id_inscrit
 
-    // Liaison des paramètres avec leurs valeurs
-    $stmt->bindParam(':nom', $nom);
-    $stmt->bindParam(':prenom', $prenom);
-    $stmt->bindParam(':email', $email);
+    UNION
 
-    // Définition des valeurs
-    $nom = 'khalfoun';
-    $prenom = 'salim';
-    $email = 'salim.khalfoun@yahoo.fr';
+    SELECT ins.prenom, com.commentaire
+    FROM inscrits AS ins
+    RIGHT JOIN commentaire AS com
+    ON ins.id = com.id_inscrit";
 
-    // Exécution de la requête
-    $stmt->execute();
+    $requete = $connexion->prepare($jointure_int);
+    $requete->execute();
 
-    echo "Insertion réussie !";
-} catch (PDOException $e) {
-    echo "Erreur : " . $e->getMessage();
+    $resultat = $requete->fetchAll(PDO::FETCH_ASSOC);
+    echo "<table border='1'>";
+    echo "<tr><th>Prénom</th><th>Commentaire</th></tr>";
+    foreach ($resultat as $row) {
+        echo "<tr><td>{$row['prenom']}</td><td>{$row['commentaire']}</td></tr>";
+    }
+    echo "</table>";
+ 
 }
+catch(PDOException $e){
+    echo "Erreur de connexion : " . $e->getMessage();
+}
+
+
 ?>
 </main> 
 <footer>
